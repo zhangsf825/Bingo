@@ -1,0 +1,44 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  port: 18080
+  servlet:
+    context-path: /bingo
+    session:
+      cookie:
+        http-only: true
+
+spring:
+  profiles:
+    active: test
+  messages:
+    encoding: UTF-8
+    basename: i18n/messages
+  main:
+    allow-bean-definition-overriding: true
+
+
+# MyBatis
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: com.bingo.**.entity
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mapper/**/*Mapper.xml
+  # 加载全局的配置文件
+  configLocation: classpath:mapper/mybatis-config.xml
+
+# PageHelper分页插件
+pagehelper:
+  helperDialect: mysql
+  supportMethodsArguments: true
+  params: count=countSql
+
+
+knife4j:
+  enable: true
+  basic:
+    enable: false
+    username: admin
+    password: admin
+  setting:
+    enableFooter: false
