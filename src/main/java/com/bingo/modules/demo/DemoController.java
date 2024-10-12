@@ -19,15 +19,15 @@ public class DemoController {
 
         DemoDTO dto = new DemoDTO();
         dto.setId(1L);
-        dto.setType("内容");
+        dto.setType("type");
 
         return new ResultBean<DemoDTO>().success(dto);
     }
 
     @Operation(summary = "返回")
     @GetMapping()
-    public String ret() {
+    public ResultBean<String> ret() {
 
-        return "123";
+        return new ResultBean<String>().success("方法测试");
     }
 }

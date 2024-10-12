@@ -1,9 +1,11 @@
 package com.bingo.common.util;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+
 import java.io.Serializable;
 
-
+@Data
 @Schema(description = "ResultBean")
 public class ResultBean<T> implements Serializable {
 

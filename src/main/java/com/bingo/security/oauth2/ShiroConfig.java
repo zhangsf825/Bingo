@@ -2,8 +2,11 @@ package com.bingo.security.oauth2;
 
 import jakarta.servlet.Filter;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.config.ShiroFilterConfiguration;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,23 +20,23 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
-    // @Bean
-    // public DefaultWebSessionManager sessionManager() {
-    //     DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
-    //     sessionManager.setSessionValidationSchedulerEnabled(false);
-    //     sessionManager.setSessionIdUrlRewritingEnabled(false);
-    //
-    //     return sessionManager;
-    // }
-    //
-    // @Bean("securityManager")
-    // public SecurityManager securityManager(ShiroRealm oAuth2Realm, SessionManager sessionManager) {
-    //     DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-    //     securityManager.setRealm(oAuth2Realm);
-    //     securityManager.setSessionManager(sessionManager);
-    //     securityManager.setRememberMeManager(null);
-    //     return securityManager;
-    // }
+    @Bean
+    public DefaultWebSessionManager sessionManager() {
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        sessionManager.setSessionValidationSchedulerEnabled(false);
+        sessionManager.setSessionIdUrlRewritingEnabled(false);
+
+        return sessionManager;
+    }
+
+    @Bean("securityManager")
+    public SecurityManager securityManager(ShiroRealm oAuth2Realm, SessionManager sessionManager) {
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        securityManager.setRealm(oAuth2Realm);
+        securityManager.setSessionManager(sessionManager);
+        securityManager.setRememberMeManager(null);
+        return securityManager;
+    }
 
     @Bean("shiroFilter")
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
@@ -60,16 +63,5 @@ public class ShiroConfig {
 
         return shiroFilter;
     }
-    //
-    // @Bean("lifecycleBeanPostProcessor")
-    // public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-    //     return new LifecycleBeanPostProcessor();
-    // }
-    //
-    // @Bean
-    // public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
-    //     AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
-    //     advisor.setSecurityManager(securityManager);
-    //     return advisor;
-    // }
+
 }
