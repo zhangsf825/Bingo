@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bingo.modules.demo.mapper.DemoMapper">
+
+	<resultMap type="com.bingo.modules.demo.entity.DemoEntity" id="DemoResult">
+		<id     property="id"     column="id"     />
+		<result property="studName"   column="stud_name"   />
+	</resultMap>
+	
+	<select id="selectCount"  resultType="int">
+		select count(1) from t_demo
+	</select>
+
+	<select id="selectById"  resultType="int" resultMap="DemoResult" >
+		select * from t_demo where id = #{id}
+	</select>
+
+	<select id="selectList" parameterType="com.bingo.modules.demo.entity.DemoEntity" resultMap="DemoResult">
+		select * from t_demo
+		<where>
+			<if test="id != null and id != 0">
+				AND id = #{id}
+			</if>
+			<if test="studName != null and studName != ''">
+				AND stud_name like concat('%', #{studName}, '%')
+			</if>
+		</where>
+	</select>
+
+	<insert id="insert" parameterType="com.bingo.modules.demo.entity.DemoEntity"
+			useGeneratedKeys="true"  keyProperty="id" >
+		insert into t_demo( stud_name ) values( #{studName} )
+	</insert>
+
+
+</mapper> 

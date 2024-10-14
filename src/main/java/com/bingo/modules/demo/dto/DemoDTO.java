@@ -1,4 +1,4 @@
-package com.bingo.modules.demo;
+package com.bingo.modules.demo.dto;
 
 import com.bingo.common.validator.AddGroup;
 import com.bingo.common.validator.DefaultGroup;

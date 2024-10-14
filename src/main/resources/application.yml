@@ -10,7 +10,7 @@ server:
 
 spring:
   profiles:
-    active: test
+    active: dev
   messages:
     encoding: UTF-8
     basename: i18n/messages
@@ -21,11 +21,13 @@ spring:
 # MyBatis
 mybatis:
   # 搜索指定包别名
-  typeAliasesPackage: com.bingo.**.entity
+  typeAliasesPackage: com.bingo.modules.**.entity
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
-  mapperLocations: classpath*:mapper/**/*Mapper.xml
-  # 加载全局的配置文件
-  configLocation: classpath:mapper/mybatis-config.xml
+  mapperLocations: classpath:mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 
 # PageHelper分页插件
 pagehelper:
