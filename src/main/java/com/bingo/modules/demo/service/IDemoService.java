@@ -11,4 +11,6 @@ public interface IDemoService {
     DemoEntity selectById(Long id);
 
     List<DemoEntity> getList(DemoEntity entity);
+
+    Long insert(DemoEntity entity);
 }

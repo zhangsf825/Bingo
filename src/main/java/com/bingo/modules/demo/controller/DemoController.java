@@ -45,6 +45,13 @@ public class DemoController {
     }
 
 
+    @Operation(summary = "保存数据")
+    @PostMapping("insert")
+    public ResultBean<String> insert(@RequestBody DemoEntity entity) {
+
+        Long id =  demoService.insert(entity);
+        return new ResultBean<String>().success(String.valueOf(id));
+    }
 
 
 }

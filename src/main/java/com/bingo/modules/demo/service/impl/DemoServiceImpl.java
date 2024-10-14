@@ -30,4 +30,9 @@ public class DemoServiceImpl implements IDemoService {
     public List<DemoEntity> getList(DemoEntity entity) {
         return mapper.selectList(entity);
     }
+
+    @Override
+    public Long insert(DemoEntity entity) {
+        return mapper.insert(entity);
+    }
 }

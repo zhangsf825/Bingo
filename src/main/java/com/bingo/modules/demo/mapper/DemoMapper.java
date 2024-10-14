@@ -8,9 +8,11 @@ import java.util.List;
 @Mapper
 public interface DemoMapper {
 
-    public int selectCount();
+    int selectCount();
 
-    public DemoEntity selectById(Long id);
+    DemoEntity selectById(Long id);
 
-    public List<DemoEntity> selectList(DemoEntity entity);
+    List<DemoEntity> selectList(DemoEntity entity);
+
+    Long insert(DemoEntity entity);
 }
