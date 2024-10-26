@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bingo.modules.generator.mapper.GeneratorMapper">
+
+	<resultMap type="com.bingo.modules.generator.entity.TableColumnEntity" id="TableColumnResult">
+		<id     property="id"     column="id"     />
+		<result property="tableId"   column="table_id"   />
+		<result property="tableName"   column="table_name"   />
+		<result property="columnName"   column="column_name"   />
+		<result property="dataType"   column="column_type"   />
+		<result property="columnComment"   column="column_comment"   />
+		<result property="attrName"   column="attr_name"   />
+		<result property="attrType"   column="attr_type"   />
+		<result property="packageName"   column="package_name"   />
+		<result property="isPk"   column="is_pk" />
+		<result property="isRequired"   column="is_required"   />
+		<result property="sort"   column="sort"   />
+	</resultMap>
+
+
+	<select id="getColumnListByName" parameterType="com.bingo.modules.generator.entity.TableColumnEntity" resultMap="TableColumnResult">
+		select * from s_gen_table_column where table_name =  #{tableName} order by sort
+	</select>
+
+	<select id="getSchemaColumnByName"  resultType="com.bingo.modules.generator.entity.SchemaColumnEntity">
+		select column_name, data_type, column_comment, column_key
+		from information_schema.columns
+		where table_name =  #{tableName}
+		and table_schema = (select database())
+		order by ordinal_position
+	</select>
+
+	<select id="insertColumnList" >
+		insert into s_gen_table_column (table_id, table_name, column_name, column_type, column_comment, attr_name,
+		attr_type, package_name, is_pk, is_required, sort)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(
+			#{item.tableId}, #{item.tableName}, #{item.columnName}, #{item.columnType}, #{item.columnComment}, #{item.attrName},
+			#{item.attrType}, #{item.packageName}, #{item.isPk}, #{item.isRequired}, #{item.sort}
+			)
+		</foreach>
+	</select>
+
+
+
+</mapper> 

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * Swagger配置
  */
 @Configuration
-public class SwaggerConfig {
+class SwaggerConfig {
 
     @Bean
     public GroupedOpenApi userApi() {
