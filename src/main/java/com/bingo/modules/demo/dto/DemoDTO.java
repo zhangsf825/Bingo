@@ -23,19 +23,18 @@ public class DemoDTO implements Serializable {
     @NotBlank(message = "类型不能为空", groups = DefaultGroup.class)
     private String type;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String title;
+    private String chapter;
+    private String section;
+    private String analysis;
+    private String optionA;
+    private String optionB;
+    private String optionC;
+    private String optionD;
+    private String answer;
+    private String course;
+    private String createTime;
 
-    public String getType() {
-        return type;
-    }
 
-    public void setType( String type) {
-        this.type = type;
-    }
 }

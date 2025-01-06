@@ -16,4 +16,8 @@ public abstract class BaseEntity implements Serializable {
     private Long  creator;
 
     private Date createDate;
+
+    private Long  updater;
+
+    private Date updaterDate;
 }

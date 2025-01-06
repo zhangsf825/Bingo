@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bingo.modules.question.mapper.QuestionMapper">
+
+	<select id="selectCount"  resultType="int">
+		select count(1) from t_question
+	</select>
+
+	<select id="selectById"  resultType="com.bingo.modules.question.entity.QuestionEntity">
+		select * from t_question where id = #{id}
+	</select>
+
+	<select id="selectList" parameterType="com.bingo.modules.question.entity.QuestionEntity" resultType="com.bingo.modules.question.entity.QuestionEntity">
+		select * from t_question
+		<where>
+			<if test="content != null and content != ''">
+				AND content like concat('%', #{content}, '%')
+			</if>
+		</where>
+	</select>
+
+	<insert id="insert" parameterType="com.bingo.modules.question.entity.QuestionEntity"
+			useGeneratedKeys="true"  keyProperty="id" >
+		insert into t_question( stud_name ) values( #{studName} )
+	</insert>
+
+
+</mapper> 
